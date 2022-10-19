@@ -6,7 +6,7 @@ public class Settings
 {
     public const float fadeDuration = 0.35f;
     public const float fadeAlpha = 0.45f;
-    public const float secondThreshold = 0.012f;
+    public const float secondThreshold = 0.0012f;
     public const int secondHold = 59;
     public const int minuteHold = 59;
     public const int hourHold = 23;

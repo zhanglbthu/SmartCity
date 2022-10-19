@@ -30,4 +30,14 @@ public static class EventHandler
     {
         GameDateEvent?.Invoke(hour, day, month, year, season);
     }
+    public static event Action GameDataEvent;
+    public static void CallGameDataEvent()
+    {
+        GameDataEvent?.Invoke();//如果事件不为空则触发事件
+    }
+    public static event Action GameOverEvent;
+    public static void CallGameOverEvent()
+    {
+        GameOverEvent?.Invoke();
+    }
 }

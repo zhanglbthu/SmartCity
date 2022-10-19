@@ -11,10 +11,24 @@ public class Player : MonoBehaviour
     private Vector2 movementInput;
     private Animator[] animators;
     private bool isMoving;
+    private bool gameEnd;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animators = GetComponentsInChildren<Animator>();
+        gameEnd = false;
+    }
+    private void OnEnable()
+    {
+        EventHandler.GameOverEvent += OnGameOverEvent;
+    }
+    private void OnDisable()
+    {
+        EventHandler.GameOverEvent -= OnGameOverEvent;
+    }
+    private void OnGameOverEvent()
+    {
+        gameEnd = true;
     }
     private void Update()
     {
@@ -23,7 +37,10 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Movement();
+        if(!gameEnd)
+        {
+            Movement();
+        }
     }
 
 

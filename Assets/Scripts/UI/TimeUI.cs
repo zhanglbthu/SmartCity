@@ -14,6 +14,8 @@ public class TimeUI : MonoBehaviour
     public TextMeshProUGUI timeText;
 
     public Sprite[] seasonSprites;
+    public GameObject endUI;
+    public TextMeshProUGUI endText;
 
     private List<GameObject> clockBlocks = new List<GameObject>();
 
@@ -30,12 +32,14 @@ public class TimeUI : MonoBehaviour
     {
         EventHandler.GameMinuteEvent += OnGameMinuteEvent;
         EventHandler.GameDateEvent += OnGameDateEvent;
+        EventHandler.GameOverEvent += OnGameOverEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
         EventHandler.GameDateEvent -= OnGameDateEvent;
+        EventHandler.GameOverEvent -= OnGameOverEvent;
     }
     private void OnGameMinuteEvent(int minute, int hour)
     {
@@ -49,7 +53,11 @@ public class TimeUI : MonoBehaviour
         SwitchHourImage(hour);
         DayNightImageRotate(hour);
     }
-
+    private void OnGameOverEvent()
+    {
+        endUI.SetActive(true);
+        endText.text = "" + DataManager.Instance.economy;
+    }
     /// <summary>
     /// 根据小时切换时间块显示
     /// </summary>

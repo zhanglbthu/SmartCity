@@ -6,7 +6,7 @@ namespace Farm.Inventory//使用命名空间，避免代码耦合
 {
     public class InventoryManager : Singleton<InventoryManager>
     {
-        public ItemToolTip itemToolTip;
+        private ItemToolTip itemToolTip;
         [Header("物品数据")]
         public ItemDataList_SO itemDataList_SO;
         [Header("背包数据")]

@@ -20,21 +20,26 @@ public class TimeManager : MonoBehaviour
     }
     private void Update()
     {
-        if(!gameClockPause)
+        if (!gameClockPause)
         {
             tikTime += Time.deltaTime;
-            if(tikTime >= Settings.secondThreshold)
+            if (tikTime >= Settings.secondThreshold)
             {
                 tikTime -= Settings.secondThreshold;
                 UpdateGameTime();
             }
-        }
-        if(Input.GetKey(KeyCode.T))
-        {
-            for(int i = 0; i < 60;i++)
+            if (Input.GetKey(KeyCode.T))
             {
-                UpdateGameTime();
+                for (int i = 0; i < 60; i++)
+                {
+                    UpdateGameTime();
+                }
             }
+        }
+        if (gameDay >= 10)
+        {
+            EventHandler.CallGameOverEvent();
+            gameClockPause = true;
         }
     }
     private void NewGameTime()
@@ -44,6 +49,7 @@ public class TimeManager : MonoBehaviour
         gameHour = 0;
         gameDay = 1;
         gameMonth = 1;
+        gameYear = 2023;
         gameSeason = Season.春天;
     }
     private void UpdateGameTime()
@@ -94,10 +100,11 @@ public class TimeManager : MonoBehaviour
                             }
                         }
                     }
+                    EventHandler.CallGameDataEvent();
                 }
                 EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
             }
-            EventHandler.CallGameMinuteEvent(gameMinute, gameHour); 
+            EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
         }
     }
 }
